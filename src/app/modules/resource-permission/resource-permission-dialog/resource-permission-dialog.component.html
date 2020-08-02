@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h2>{{data.action | titlecase}}</h2>
+  <p *ngIf="data.action==='update'" class="mat-caption">{{resourcePermission._id}}</p>
+</div>
+
+<form #entityForm="ngForm" id="entityForm" novalidate>
+  <mat-form-field class="w-100">
+    <mat-label>ResourceName</mat-label>
+    <input [(ngModel)]="resourcePermission.resourceName" autocomplete="off" matInput name="resourceName">
+    <mat-icon matSuffix>text_fields</mat-icon>
+  </mat-form-field>
+
+  <div class="flex-column">
+    <div class="flex-row d-flex justify-content-between align-items-center">
+      <p class="m-0">Methods</p>
+      <div>
+        <button mat-icon-button (click)="removeMethods()">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <button mat-icon-button (click)="addMethods()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="grouped-inputs"
+         *ngFor="let method of resourcePermission.methods; index as methodIndex; last as isLastMethod">
+      <mat-form-field class="w-100">
+        <mat-label>Name</mat-label>
+        <input [(ngModel)]="method.name" autocomplete="off" matInput name="name[{{methodIndex}}]">
+        <mat-icon matSuffix>text_fields</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Roles</mat-label>
+        <mat-chip-list #chipListRoles>
+          <mat-chip
+            *ngFor="let role of method.roles"
+            [selectable]="selectableChipListRoles"
+            [removable]="removableChipListRoles"
+            (removed)="remove(role, methodIndex)">
+            {{role.name}}
+            <mat-icon matChipRemove *ngIf="removableChipListRoles">cancel</mat-icon>
+          </mat-chip>
+          <input matInput [matAutocomplete]="roleAuto" [(ngModel)]="roleInputs[methodIndex]"
+                 (ngModelChange)="changedRole($event, methodIndex)"
+                 [matChipInputFor]="chipListRoles" autocomplete="off" name="roleInputs[{{methodIndex}}]">
+        </mat-chip-list>
+        <mat-autocomplete #roleAuto="matAutocomplete" [displayWith]="displayRoleFn"
+                          (optionSelected)="selectedRole($event, methodIndex)">
+          <mat-option *ngFor="let role of filteredRoles[methodIndex] | async" [value]="role">
+            {{role.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <ng-container>
+      <button (click)="save()" *ngIf="!isLoading; else loadingButton" [disabled]="entityForm.pristine"
+              color="primary" mat-raised-button>Save
+      </button>
+      <ng-template #loadingButton>
+        <button color="accent" disabled mat-raised-button>
+          <mat-spinner class="m-2" diameter="20"></mat-spinner>
+        </button>
+      </ng-template>
+    </ng-container>
+  </div>
+</form>

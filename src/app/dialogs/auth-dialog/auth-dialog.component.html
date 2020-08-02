@@ -1,0 +1,19 @@
+<mat-form-field class="d-flex flex-fill">
+  <mat-label>Email</mat-label>
+  <input [(ngModel)]="authCredentials.email" matInput placeholder="Placeholder">
+  <mat-icon matSuffix>email</mat-icon>
+</mat-form-field>
+<mat-form-field class="d-flex flex-fill">
+  <mat-label>Password</mat-label>
+  <input [(ngModel)]="authCredentials.password" matInput placeholder="Placeholder">
+  <mat-icon matSuffix>lock</mat-icon>
+</mat-form-field>
+<div class="d-flex justify-content-end">
+  <button (click)="submit()" *ngIf="!isLoading; else loadingButton" mat-button>Login</button>
+</div>
+
+<ng-template #loadingButton>
+  <button color="accent" disabled mat-raised-button>
+    <mat-spinner class="m-2" diameter="20"></mat-spinner>
+  </button>
+</ng-template>

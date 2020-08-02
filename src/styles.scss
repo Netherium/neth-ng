@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style filesDragged */
+@import "theming/neth.theme";
+@import "theming/grid";
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.dialog-responsive {
+  width: 75vw;
+  @media (min-width: 960px) {
+    width: 30vw;
+  }
+}
+
+.dialog-full{
+  width: 90vw;
+}
+
+.mat-list-base[dense].cell-mat-list {
+  .mat-list-item {
+    height: 20px;
+
+    .mat-list-item-content {
+      padding-left: 0;
+    }
+  }
+}
+
+a.cell-file{
+  position: relative;
+  img, mat-icon{
+    display: flex !important;
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 80px !important;
+  }
+}
