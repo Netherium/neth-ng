@@ -13,8 +13,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-resource-permission-detail',
-  templateUrl: './resource-permission-detail.component.html',
-  styleUrls: ['./resource-permission-detail.component.scss']
+  templateUrl: './resource-permission-detail.component.html'
 })
 export class ResourcePermissionDetailComponent {
   action: CRUDAction = CRUDAction.CREATE;
