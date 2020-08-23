@@ -8,9 +8,9 @@ describe('ResourcePermissionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourcePermissionComponent ]
+      declarations: [ResourcePermissionComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

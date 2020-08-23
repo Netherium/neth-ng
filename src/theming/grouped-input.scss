@@ -1,5 +1,9 @@
 @import '~@angular/material/theming';
 
+/**
+Mixin for theming on grouped inputs, currently used in 'Resource Permissions'
+to serve nested array in nested array
+ */
 @mixin grouped-input-color($config-or-theme) {
   $config: mat-get-color-config($config-or-theme);
   $foreground: map-get($config, foreground);

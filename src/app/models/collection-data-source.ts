@@ -1,9 +1,9 @@
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
-import { BehaviorSubject, combineLatest, EMPTY, Observable, timer } from 'rxjs';
 import { Sort } from '@angular/material/sort';
-import { PaginatedCollection } from './paginated-collection.model';
-import { HttpGenericService } from '../services/http-generic.service';
+import { BehaviorSubject, combineLatest, Observable, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map, share, switchMap } from 'rxjs/operators';
+import { HttpGenericService } from '../services/http-generic.service';
+import { PaginatedCollection } from './paginated-collection.model';
 
 export class CollectionDataSource<T> extends DataSource<T> {
   sort: BehaviorSubject<Sort>;
@@ -14,15 +14,14 @@ export class CollectionDataSource<T> extends DataSource<T> {
   data: BehaviorSubject<T[]>;
   selection: SelectionModel<T>;
 
-  constructor(private httpService: HttpGenericService, resource: string, initialSort: Sort, initialPageNumber: number, initialPageSize: number, initialQuery: string,public selectedValues: T[] = []) {
+  constructor(private httpService: HttpGenericService, resource: string, initialSort: Sort, initialPageNumber: number, initialPageSize: number, initialQuery: string, multipleSelection = true) {
     super();
     this.sort = new BehaviorSubject<Sort>(initialSort);
     this.pageNumber = new BehaviorSubject<number>(initialPageNumber);
     this.pageSize = new BehaviorSubject<number>(initialPageSize);
     this.query = new BehaviorSubject<string>(initialQuery);
     this.data = new BehaviorSubject<T[]>([]);
-    this.selection = new SelectionModel<T>(true, selectedValues, true);
-    // this.selection.select(...selectedValues);
+    this.selection = new SelectionModel<T>(multipleSelection, []);
     const param$ = combineLatest([this.sort, this.pageSize, this.pageNumber, this.query.pipe(
       debounce(x => x !== '' ? timer(200) : timer(0)),
       distinctUntilChanged()
@@ -30,7 +29,7 @@ export class CollectionDataSource<T> extends DataSource<T> {
     this.page$ = param$.pipe(
       switchMap(([sort, pageSize, pageNumber, query]) => this.httpService.listPaginatedCollection<T>(resource, sort, pageNumber, pageSize, query)),
       share()
-    )
+    );
   }
 
   paginationTrigger(pageNumberEvent: number, pageSizeEvent: number): void {
@@ -53,7 +52,7 @@ export class CollectionDataSource<T> extends DataSource<T> {
   connect(): Observable<T[]> {
     return this.page$.pipe(
       map(page => {
-          // this.selection.clear();
+          this.selection.clear();
           this.data.next(page.data);
           return page.data;
         }
@@ -62,28 +61,6 @@ export class CollectionDataSource<T> extends DataSource<T> {
   }
 
   disconnect(): void {
-  }
-
-  isSelected(row: any){
-    // console.log(_id);
-    // this.selection.selected.includes()
-    return this.selection.selected.some((item: any) => item._id === row._id);
-    // false;
-  }
-
-  toggle(row: any){
-    if(this.isSelected(row)){
-
-      this.selection.selected.forEach((rowItem: any) => {
-        if(rowItem._id === row._id){
-          this.selection.deselect(row);
-        }
-      });
-      console.log(this.selection);
-      console.log(this.selection.selected === this.selectedValues);
-    }else{
-      this.selection.select(row);
-    }
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -97,7 +74,7 @@ export class CollectionDataSource<T> extends DataSource<T> {
   masterToggle(): void {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.data.getValue().forEach(row => this.selection.select(row))
+      this.data.getValue().forEach(row => this.selection.select(row));
   }
 
 }

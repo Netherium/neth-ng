@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import { ResourcePermissionRoutingModule } from './resource-permission-routing.module';
 import { ResourcePermissionComponent } from './resource-permission.component';
-import { ResourcePermissionDialogComponent } from './resource-permission-dialog/resource-permission-dialog.component';
+import { ResourcePermissionDetailComponent } from './resource-permission-detail/resource-permission-detail.component';
 
 
 @NgModule({
-  declarations: [ResourcePermissionComponent, ResourcePermissionDialogComponent],
+  declarations: [ResourcePermissionComponent, ResourcePermissionDetailComponent],
   imports: [
     SharedModule,
     ResourcePermissionRoutingModule

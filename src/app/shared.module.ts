@@ -5,20 +5,18 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from '@angular/m
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { MultipleFileUploadComponent } from './components/multiple-file-upload/multiple-file-upload.component';
-import { AuthDialogComponent } from './dialogs/auth-dialog/auth-dialog.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploadDialogComponent } from './dialogs/upload-dialog/upload-dialog.component';
 import { CommonModule } from '@angular/common';
-import { SingleFileUploadComponent } from './components/single-file-upload/single-file-upload.component';
-
+import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
-    MultipleFileUploadComponent,
-    SingleFileUploadComponent,
-    AuthDialogComponent,
-    UploadDialogComponent
+    FileUploadComponent,
+    UploadDialogComponent,
+    DynamicTableComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +25,8 @@ import { SingleFileUploadComponent } from './components/single-file-upload/singl
     MatMomentDateModule,
     ReactiveFormsModule,
     LayoutModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
@@ -38,10 +37,9 @@ import { SingleFileUploadComponent } from './components/single-file-upload/singl
     LayoutModule,
     FormsModule,
 
-    MultipleFileUploadComponent,
-    SingleFileUploadComponent,
-    AuthDialogComponent,
-    UploadDialogComponent
+    FileUploadComponent,
+    UploadDialogComponent,
+    DynamicTableComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},

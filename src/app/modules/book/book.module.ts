@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
-
-import { BookComponent } from './book.component';
-import { BookDialogComponent } from './book-dialog/book-dialog.component';
 import { SharedModule } from '../../shared.module';
+import { BookComponent } from './book.component';
+import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookRoutingModule } from './book-routing.module';
 
 @NgModule({
-  declarations: [BookComponent, BookDialogComponent],
-  imports: [
-    SharedModule,
-    BookRoutingModule
-  ],
-  entryComponents: [BookDialogComponent]
-})
+    declarations: [BookComponent, BookDetailComponent],
+    imports: [
+      SharedModule,
+      BookRoutingModule
+    ]})
 export class BookModule {
 }

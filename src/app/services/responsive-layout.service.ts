@@ -14,7 +14,6 @@ export class ResponsiveLayoutService {
   isSmall(): Observable<boolean> {
     return this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium]).pipe(
       map(result => {
-        console.log('checking ui');
         return result.matches;
       }),
       shareReplay({

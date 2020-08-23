@@ -1,4 +1,4 @@
-import { Role } from '../../models/role.model';
+import { Role } from '../role/role.model';
 
 export interface ResourcePermission {
   _id: string;

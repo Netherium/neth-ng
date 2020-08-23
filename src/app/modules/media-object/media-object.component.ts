@@ -1,77 +1,46 @@
 import { Component } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { CollectionDataSource } from '../../models/collection-data-source';
-import { MediaObject } from '../../models/media-object.model';
+import { MediaObject } from './media-object.model';
 import { HttpGenericService } from '../../services/http-generic.service';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MediaObjectDialogComponent } from './media-object-dialog/media-object-dialog.component';
-import { forkJoin } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { DynamicCell } from '../../models/dynamic-cell.model';
+import { SubscriptionNotificationService } from '../../services/subscription-notification.service';
+
 
 @Component({
   selector: 'app-media-object',
   templateUrl: './media-object.component.html'
 })
 export class MediaObjectComponent {
-  displayedColumns = ['select', '_id', 'url', 'name', 'alternativeText', 'caption', 'mime', 'width', 'height', 'size'];
+  resource = 'media-objects';
+  displayName = 'Media Objects';
+  columns: DynamicCell[] = [
+    {header: 'Select', columnDef: 'select', type: 'select'},
+    {header: 'Id', columnDef: '_id', type: 'String'},
+    {header: 'Name', columnDef: 'name', type: 'String'},
+    {header: 'Url', columnDef: 'url', type: 'mediaObjectUrl'},
+    {header: 'AlternativeText', columnDef: 'alternativeText', type: 'String'},
+    {header: 'Caption', columnDef: 'caption', type: 'String'},
+    {header: 'Width', columnDef: 'width', type: 'Number'},
+    {header: 'Height', columnDef: 'height', type: 'Number'},
+    {header: 'Hash', columnDef: 'hash', type: 'String'},
+    {header: 'Ext', columnDef: 'ext', type: 'String'},
+    {header: 'Mime', columnDef: 'mime', type: 'String'},
+    {header: 'Size', columnDef: 'size', type: 'Number'},
+    {header: 'Path', columnDef: 'path', type: 'String'},
+    {header: 'Provider', columnDef: 'provider', type: 'String'},
+    {header: 'ProviderMetadata', columnDef: 'ProviderMetadata', type: 'String'},
+    {header: 'CreatedAt', columnDef: 'createdAt', type: 'Date'},
+    {header: 'UpdatedAt', columnDef: 'updatedAt', type: 'Date'},
+    {header: 'Edit', columnDef: 'edit', type: 'edit'},
+  ];
   sort: Sort = {
     active: '_id',
     direction: 'asc'
   }
-  dataSource = new CollectionDataSource<MediaObject>(this.httpService, 'media-objects', this.sort, 0, 10, '');
+  dataSource = new CollectionDataSource<MediaObject>(this.httpService, this.resource, this.sort, 0, 10, '');
 
-  constructor(private httpService: HttpGenericService, public dialog: MatDialog, private snackBar: MatSnackBar) {
-  }
-
-  createDialog() {
-    const dialogRef = this.dialog.open(MediaObjectDialogComponent, {
-      panelClass: 'dialog-responsive',
-      data: {
-        action: 'create',
-        mediaObject: null,
-        alternativeText: '',
-        caption: ''
-      }
-    })
-    dialogRef.afterClosed().subscribe(() => {
-      this.dataSource.sortingTrigger(this.dataSource.sort.getValue());
-    })
-  }
-
-  editDialog(mediaObject: MediaObject) {
-    const dialogRef = this.dialog.open(MediaObjectDialogComponent, {
-      panelClass: 'dialog-responsive',
-      data: {
-        action: 'update',
-        mediaObject: mediaObject,
-        alternativeText: mediaObject.alternativeText,
-        caption: mediaObject.caption
-      }
-    });
-    dialogRef.afterClosed().subscribe(() => {
-      this.dataSource.sortingTrigger(this.dataSource.sort.getValue());
-    })
-  }
-
-  deleteSelected() {
-    const sources = [];
-    this.dataSource.selection.selected.forEach(mediaObject => {
-      sources.push(this.httpService.delete('media-objects', mediaObject._id));
-    })
-    forkJoin([...sources]).subscribe(data => {
-      if (data instanceof HttpErrorResponse) {
-        this.snackBar.open(`${data.error.message} ${data.error.error}`, null, {
-          duration: 2000,
-          panelClass: ['mat-toolbar', 'mat-accent']
-        });
-      } else {
-        this.snackBar.open(`Deleted: ${sources.length}`, null, {
-          duration: 2000,
-          panelClass: ['mat-toolbar', 'mat-primary']
-        });
-        this.dataSource.sortingTrigger(this.dataSource.sort.getValue());
-      }
-    });
+  constructor(private httpService: HttpGenericService, public dialog: MatDialog, private subNotSrv: SubscriptionNotificationService) {
   }
 }

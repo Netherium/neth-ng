@@ -1,3 +1,8 @@
+/**
+Modified CSS grid based on Bootstrap 4, with modified gutters and breakpoints
+- modified gutters (32px instead of 30px default)
+- modified breakpoints (based on material.io design spec https://material.io/design/layout/responsive-layout-grid.html#breakpoints)
+ */
 .container {
   width: 100%;
   padding-right: 16px;

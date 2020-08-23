@@ -4,11 +4,11 @@ import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ErrorHandlingService } from './error-handling.service';
 import { environment } from '../../environments/environment';
+import * as jwt_decode from 'jwt-decode';
+import { JwtDecoded } from '../models/jwt-decoded.model';
 import { AuthCredentials } from '../models/auth-credentials.model';
 import { AuthUser } from '../models/auth-user.model';
 import { JWT } from '../models/jwt.model';
-import * as jwt_decode from 'jwt-decode';
-import { JwtDecoded } from '../models/jwt-decoded.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -85,6 +85,9 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
+  /**
+   * Returns JWT headers for token-interception
+   */
   getAuthHeaders() {
     return {
       Authorization: `Bearer ${this.getStoredJWT()}`
@@ -105,12 +108,16 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('JWT'));
   }
 
+  /**
+   *  Used by AuthGuardService
+   *  Returns if user is authenticated according to the authorized role, declared in environment.ts
+   */
   isAuthenticated(): Boolean {
     try {
       const token = this.getStoredJWT();
       const decodedToken = jwt_decode<JwtDecoded>(token);
       const dateNow = new Date().getTime() / 1000;
-      return (decodedToken.role === 'Admin' && decodedToken.exp > dateNow);
+      return (decodedToken.role === environment.authorizedRole && decodedToken.exp > dateNow);
     } catch (e) {
       return false;
     }

@@ -1,60 +1,53 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { CollectionDataSource } from '../../models/collection-data-source';
-import { MediaObject } from '../../models/media-object.model';
+import { MediaObject } from '../../modules/media-object/media-object.model';
 import { HttpGenericService } from '../../services/http-generic.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DynamicCell } from '../../models/dynamic-cell.model';
 
 @Component({
   selector: 'app-upload-dialog',
   templateUrl: './upload-dialog.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UploadDialogComponent implements OnInit {
-
-  displayedColumns = ['select', '_id', 'url', 'name', 'alternativeText', 'caption', 'mime', 'width', 'height', 'size'];
+export class UploadDialogComponent {
+  resource = 'media-objects';
+  displayName = 'Media Objects';
+  columns: DynamicCell[] = [
+    {header: 'Select', columnDef: 'select', type: 'select'},
+    {header: 'Id', columnDef: '_id', type: 'String'},
+    {header: 'Name', columnDef: 'name', type: 'String'},
+    {header: 'Url', columnDef: 'url', type: 'mediaObjectUrl'},
+    {header: 'AlternativeText', columnDef: 'alternativeText', type: 'String'},
+    {header: 'Caption', columnDef: 'caption', type: 'String'},
+    {header: 'Width', columnDef: 'width', type: 'Number'},
+    {header: 'Height', columnDef: 'height', type: 'Number'},
+    {header: 'Hash', columnDef: 'hash', type: 'String'},
+    {header: 'Ext', columnDef: 'ext', type: 'String'},
+    {header: 'Mime', columnDef: 'mime', type: 'String'},
+    {header: 'Size', columnDef: 'size', type: 'Number'},
+    {header: 'Path', columnDef: 'path', type: 'String'},
+    {header: 'Provider', columnDef: 'provider', type: 'String'},
+    {header: 'ProviderMetadata', columnDef: 'providerMetadata', type: 'String'},
+    {header: 'CreatedAt', columnDef: 'createdAt', type: 'Date'},
+    {header: 'UpdatedAt', columnDef: 'updatedAt', type: 'Date'},
+  ];
   sort: Sort = {
     active: '_id',
     direction: 'asc'
   }
-  dataSource = new CollectionDataSource<MediaObject>(this.httpService, 'media-objects', this.sort, 0, 5, '', this.data);
+  dataSource: CollectionDataSource<MediaObject>;
 
   constructor(private httpService: HttpGenericService, public dialogRef: MatDialogRef<UploadDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: MediaObject[]) {
-    console.log('UploadDialogComponent data', this.data);
+              @Inject(MAT_DIALOG_DATA) public data: boolean) {
+    this.dataSource = new CollectionDataSource<MediaObject>(this.httpService, this.resource, this.sort, 0, 5, '', this.data);
   }
 
-  ngOnInit() {
-    // for (const mediaObject of this.data) {
-    //   this.dataSource.selection.select(mediaObject);
-    // }
-    // console.log('selected on init', this.dataSource.selection.selected);
+  saveDialog() {
+    this.dialogRef.close(this.dataSource.selection.selected)
   }
 
-  addSelected() {
-    console.log('selection', this.dataSource.selection.selected);
-    this.data = this.dataSource.selection.selected;
-    // this.dialog.closeAll();
+  cancelDialog() {
+    this.dialogRef.close();
   }
-
-  // deleteSelected() {
-  //   const sources = [];
-  //   this.dataSource.selection.selected.forEach(mediaObject => {
-  //     sources.push(this.httpService.delete('media-objects', mediaObject._id));
-  //   })
-  //   forkJoin([...sources]).subscribe(data => {
-  //     if (data instanceof HttpErrorResponse) {
-  //       this.snackBar.open(`${data.error.message} ${data.error.error}`, null, {
-  //         duration: 2000,
-  //         panelClass: ['mat-toolbar', 'mat-accent']
-  //       });
-  //     } else {
-  //       this.snackBar.open(`Deleted: ${sources.length}`, null, {
-  //         duration: 2000,
-  //         panelClass: ['mat-toolbar', 'mat-primary']
-  //       });
-  //       this.dataSource.sortingTrigger(this.dataSource.sort.getValue());
-  //     }
-  //   });
-  // }
 }

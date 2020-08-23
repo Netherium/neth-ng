@@ -1,29 +1,50 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './services/auth-guard.service';
-import { MultipleFileUploadComponent } from './components/multiple-file-upload/multiple-file-upload.component';
-import { SingleFileUploadComponent } from './components/single-file-upload/single-file-upload.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ShellComponent } from './components/shell/shell.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
-
-const routes: Routes = [
+const childrenRoutes: Routes = [
   {
-    path: 'users',
-    loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule),
-    canActivate: [AuthGuardService],
+    path: '',
+    component: HomeComponent,
     data: {
       state: 'users',
       slug: 'Users',
-      icon: 'person'
+      icon: 'person',
+      type: 'base'
+    }
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule),
+    data: {
+      state: 'users',
+      slug: 'Users',
+      icon: 'person',
+      type: 'base'
+    }
+  },
+  {
+    path: 'roles',
+    loadChildren: () => import('./modules/role/role.module').then(m => m.RoleModule),
+    data: {
+      state: 'roles',
+      slug: 'Roles',
+      icon: 'group',
+      type: 'base'
     }
   },
   {
     path: 'resource-permissions',
     loadChildren: () => import('./modules/resource-permission/resource-permission.module').then(m => m.ResourcePermissionModule),
-    canActivate: [AuthGuardService],
     data: {
       state: 'resourcePermissions',
       slug: 'Resource Permissions',
-      icon: 'admin_panel_settings'
+      icon: 'admin_panel_settings',
+      type: 'base'
     }
   },
   {
@@ -32,48 +53,35 @@ const routes: Routes = [
     data: {
       state: 'mediaObjects',
       slug: 'Media Objects',
-      icon: 'cloud_upload'
+      icon: 'perm_media',
+      type: 'base'
     }
   },
-  {
-    path: 'file-uploads',
-    component: MultipleFileUploadComponent,
-    data: {
-      state: 'fileUploads',
-      slug: 'FileUploads',
-      icon: 'image'
-    }
-  },
-  {
-    path: 'single-upload',
-    component: SingleFileUploadComponent,
-    data: {
-      state: 'singleUpload',
-      slug: 'Single Upload',
-      icon: 'image'
-    }
-  },
-  {
-    path: 'products',
-    loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule),
-    canActivate: [AuthGuardService],
-    data: {
-      state: 'products',
-      slug: 'Products',
-      icon: 'local_offer'
-    }
-  },
-
   {
     path: 'books',
     loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule),
-    canActivate: [AuthGuardService],
     data: {
       state: 'books',
       slug: 'Books',
-      icon: 'tag'
+      icon: 'tag',
+      type: 'resource'
     }
   }
+];
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ShellComponent,
+    canActivate: [AuthGuardService],
+    children: childrenRoutes
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {path: '404', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

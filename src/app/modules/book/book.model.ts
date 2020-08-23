@@ -1,16 +1,19 @@
-import { MediaObject } from '../../models/media-object.model';
 import { User } from '../user/user.model';
+import { MediaObject } from '../media-object/media-object.model';
 
 export interface Book {
   _id: string;
   title?: string;
   isbn?: number;
-  author?: User;
   isPublished?: boolean;
+  publishedAt?: Date;
+  author?: User;
+  collaborators?: User[];
   cover?: MediaObject;
   images?: MediaObject[];
-  publishedAt?: Date;
   tags?: string[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  pagesForReview?: number[];
+  datesForReview?: Date[];
+  readonly createdAt?: Date;
+  readonly updatedAt?: Date;
 }
