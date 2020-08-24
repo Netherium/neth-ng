@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit {
   registerSVG() {
     this.matIconRegistry
       .addSvgIconSetInNamespace('neth',
-        this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/icon-set.svg'))
+        this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/icon-set.svg'));
   }
 
   ngAfterViewInit() {

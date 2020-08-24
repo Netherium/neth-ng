@@ -39,10 +39,6 @@ $neth-dark-theme: mat-dark-theme((
   )
 ));
 .dark-theme {
-  //@include angular-material-theme($neth-dark-theme);
-  //@include grouped-input-theme($neth-dark-theme);
-  //@include mat-label-toggle-theme($neth-dark-theme);
-  //@include mat-select-panel-theme($neth-light-theme);
   @include angular-material-color($neth-dark-theme);
   @include file-upload-color($neth-dark-theme);
   @include grouped-input-color($neth-dark-theme);

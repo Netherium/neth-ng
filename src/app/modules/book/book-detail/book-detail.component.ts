@@ -81,7 +81,7 @@ export class BookDetailComponent {
 
   authorDisplayFn(user: User): string {
     if (user) {
-      return user.name;
+      return user.email;
     }
   }
 
@@ -101,7 +101,7 @@ export class BookDetailComponent {
 
   collaboratorsDisplayFn(user: User): string {
     if (user) {
-      return user.name;
+      return user.email;
     }
   }
 
@@ -161,7 +161,6 @@ export class BookDetailComponent {
     } else {
       obs = this.httpService.update<Book>('books', this.book);
     }
-    //@ts-ignore
     this.subNotSrv.singleSubscription<Book>(obs, this.action, 'Book', () => {
       this.isLoading = false;
     }, () => {

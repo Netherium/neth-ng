@@ -78,7 +78,7 @@
             <mat-spinner *ngIf="isLoadingAuthor" diameter="20" matSuffix></mat-spinner>
             <mat-autocomplete #authorAuto="matAutocomplete" [displayWith]="authorDisplayFn">
               <mat-option *ngFor="let item of filteredAuthor | async" [value]="item">
-                {{item.name}}
+                {{item.email}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -87,7 +87,7 @@
             <mat-chip-list #collaboratorsChipList>
               <mat-chip *ngFor="let item of book.collaborators; index as collaboratorsIndex" [selectable]="true"
                         [removable]="true" (removed)="removeCollaborators(collaboratorsIndex, entityForm)">
-                {{item.name}}
+                {{item.email}}
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
               <input matInput [ngModel]="book.collaborators" (ngModelChange)="collaboratorsChanged($event)"
@@ -98,7 +98,7 @@
               <mat-autocomplete #collaboratorsAuto="matAutocomplete" [displayWith]="collaboratorsDisplayFn"
                                 (optionSelected)="selectedCollaborators($event)">
                 <mat-option *ngFor="let item of filteredCollaborators | async" [value]="item">
-                  {{item.name}}
+                  {{item.email}}
                 </mat-option>
               </mat-autocomplete>
             </mat-chip-list>

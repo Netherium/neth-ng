@@ -7,7 +7,7 @@ import { PaginatedCollection } from './paginated-collection.model';
 
 export class CollectionDataSource<T> extends DataSource<T> {
   sort: BehaviorSubject<Sort>;
-  pageNumber: BehaviorSubject<number>
+  pageNumber: BehaviorSubject<number>;
   pageSize: BehaviorSubject<number>;
   query: BehaviorSubject<string>;
   page$: Observable<PaginatedCollection<T>>;
@@ -42,11 +42,11 @@ export class CollectionDataSource<T> extends DataSource<T> {
   }
 
   sortingTrigger(sortEvent: Sort): void {
-    this.sort.next(sortEvent)
+    this.sort.next(sortEvent);
   }
 
   queryTrigger(query: string): void {
-    this.query.next(query)
+    this.query.next(query);
   }
 
   connect(): Observable<T[]> {

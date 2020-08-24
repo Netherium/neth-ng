@@ -10,9 +10,9 @@ import { debounceTime, distinctUntilChanged, filter, finalize, map, switchMap, t
 import { Role } from '../../role/role.model';
 
 @Component({
-    selector: 'app-user-detail',
-    templateUrl: './user-detail.component.html'
-  })
+  selector: 'app-user-detail',
+  templateUrl: './user-detail.component.html'
+})
 export class UserDetailComponent {
   action: CRUDAction = CRUDAction.CREATE;
   user: User = {
@@ -23,7 +23,7 @@ export class UserDetailComponent {
     role: null,
     display: null,
     isVerified: null,
-    };
+  };
   isLoading = false;
   roleChangedSub: Subject<string> = new Subject<string>();
   filteredRole: Observable<Role[]>;

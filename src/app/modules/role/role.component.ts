@@ -8,7 +8,7 @@ import { Role } from './role.model';
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html'
-  })
+})
 export class RoleComponent {
   resource = 'roles';
   displayName = 'Roles';
@@ -21,11 +21,11 @@ export class RoleComponent {
     {header: 'CreatedAt', columnDef: 'createdAt', type: 'Date'},
     {header: 'UpdatedAt', columnDef: 'updatedAt', type: 'Date'},
     {header: 'Edit', columnDef: 'edit', type: 'edit'}
-    ];
+  ];
   sort: Sort = {
-        active: '_id',
-        direction: 'asc'
-      };
+    active: '_id',
+    direction: 'asc'
+  };
   dataSource = new CollectionDataSource<Role>(this.httpService, this.resource, this.sort, 0, 10, '');
 
   constructor(private httpService: HttpGenericService) {

@@ -15,7 +15,7 @@ export class LoginComponent {
   authCredentials: AuthCredentials = {
     email: '',
     password: ''
-  }
+  };
 
   constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router) {
   }
@@ -24,12 +24,12 @@ export class LoginComponent {
     const snackbarConfigSuccess: MatSnackBarConfig = {
       duration: 2000,
       panelClass: ['mat-toolbar', 'mat-primary']
-    }
+    };
 
     const snackbarConfigError: MatSnackBarConfig = {
       duration: 2000,
       panelClass: ['mat-toolbar', 'mat-accent']
-    }
+    };
     this.isLoading = true;
     this.authService.login(this.authCredentials)
       .subscribe(data => {

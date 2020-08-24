@@ -20,7 +20,7 @@ export class ShellComponent {
   constructor(private layout: ResponsiveLayoutService, private breakpointObserver: BreakpointObserver,
               private authService: AuthService,
               private router: Router) {
-    const childrenRoutes = this.router.config.filter(route => route.path === "");
+    const childrenRoutes = this.router.config.filter(route => route.path === '');
     if (childrenRoutes.length > 0) {
       this.routerLinks = childrenRoutes[0].children;
     }

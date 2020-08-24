@@ -47,8 +47,8 @@ export class FileUploadComponent implements OnInit, OnDestroy, ControlValueAcces
 
   ngOnInit(): void {
     this.dropZoneEl = this.dropZone.nativeElement as HTMLElement;
-    this.dropZoneEl.addEventListener('dragenter', this.handleDragEnter.bind(this), false)
-    this.dropZoneEl.addEventListener('dragleave', this.handleDragLeave.bind(this), false)
+    this.dropZoneEl.addEventListener('dragenter', this.handleDragEnter.bind(this), false);
+    this.dropZoneEl.addEventListener('dragleave', this.handleDragLeave.bind(this), false);
     this.dropZoneEl.addEventListener('dragover', this.handleDragOver.bind(this), false);
     this.dropZoneEl.addEventListener('drop', this.handleFileDrop.bind(this), false);
   }
@@ -151,7 +151,7 @@ export class FileUploadComponent implements OnInit, OnDestroy, ControlValueAcces
     if (this.multiple) {
       if (this.inputFile.nativeElement.files instanceof FileList && this.inputFile.nativeElement.files.length > 0) {
         for (let i = 0; i < this.inputFile.nativeElement.files.length; i++) {
-          (this.files as File[] | MediaObject[]).push((this.inputFile.nativeElement.files as FileList).item(i) as any)
+          (this.files as File[] | MediaObject[]).push((this.inputFile.nativeElement.files as FileList).item(i) as any);
         }
       }
     } else {
@@ -187,14 +187,14 @@ export class FileUploadComponent implements OnInit, OnDestroy, ControlValueAcces
           sources.push(this.httpService.createUpload<MediaObject>('media-objects', newMediaObject, file));
           fileRefs.push(fileRef);
         }
-      })
+      });
       this.isLoading = true;
       this.createSubscription = this.subNotSrv.bulkSubscription<MediaObject>(sources, CRUDAction.CREATE, () => {
         this.isLoading = false;
       }, (data) => {
         data.forEach((createdFile, createdFileIndex) => {
           this.files[fileRefs[createdFileIndex]] = createdFile;
-        })
+        });
         this.onChange(this.files);
         this.onTouched();
       });
@@ -291,8 +291,8 @@ export class FileUploadComponent implements OnInit, OnDestroy, ControlValueAcces
     if (this.createSubscription) {
       this.createSubscription.unsubscribe();
     }
-    this.dropZoneEl.removeEventListener('dragenter', this.handleDragEnter.bind(this), false)
-    this.dropZoneEl.removeEventListener('dragleave', this.handleDragLeave.bind(this), false)
+    this.dropZoneEl.removeEventListener('dragenter', this.handleDragEnter.bind(this), false);
+    this.dropZoneEl.removeEventListener('dragleave', this.handleDragLeave.bind(this), false);
     this.dropZoneEl.removeEventListener('dragover', this.handleDragOver.bind(this), false);
     this.dropZoneEl.removeEventListener('drop', this.handleFileDrop.bind(this), false);
   }

@@ -10,7 +10,8 @@ import { CRUDAction } from '../../models/crud-action.model';
 
 @Component({
   selector: 'app-dynamic-table',
-  templateUrl: './dynamic-table.component.html'
+  templateUrl: './dynamic-table.component.html',
+  styleUrls: ['./dynamic-table.component.scss'],
 })
 export class DynamicTableComponent implements OnInit, OnDestroy {
   @Input() dataSource: CollectionDataSource<any>;
@@ -41,8 +42,7 @@ export class DynamicTableComponent implements OnInit, OnDestroy {
   }
 
   /**
-   *
-   * @param row
+   * Click handler for edit
    */
   editDialog(row: any) {
     this.router.navigate([`${(this.resource)}/edit/`, row._id]);
@@ -56,7 +56,7 @@ export class DynamicTableComponent implements OnInit, OnDestroy {
     const sources = [];
     this.dataSource.selection.selected.forEach(item => {
       sources.push(this.httpService.delete(this.resource, item._id));
-    })
+    });
     this.bulkDeleteSubscription = this.subNotSrv.bulkSubscription(sources, CRUDAction.DELETE, () => {
       this.dataSource.sortingTrigger(this.dataSource.sort.getValue());
     });

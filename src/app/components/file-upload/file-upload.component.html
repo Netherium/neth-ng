@@ -12,7 +12,7 @@
                   [removable]="true" [selected]="file.url !== undefined" class="justify-content-between"
                   color="primary">
           <ng-container *ngIf="file !== null && file.url else notYetUploaded">
-            <img *ngIf="file.thumbnail" [src]="file.thumbnail.url" [alt]="file.name">
+            <img *ngIf="file.thumbnail" [alt]="file.name" [src]="file.thumbnail.url">
             {{file.hash + file.ext}}
           </ng-container>
           <ng-template #notYetUploaded>
@@ -26,7 +26,7 @@
                   [removable]="standAlone === false || !files.url"
                   [selected]="files.url !== undefined" class="justify-content-between" color="primary">
           <ng-container *ngIf="files.url else notYetUploaded">
-            <img *ngIf="files.thumbnail" [src]="files.thumbnail.url" [alt]="files.name">
+            <img *ngIf="files.thumbnail" [alt]="files.name" [src]="files.thumbnail.url">
             {{files.hash + files.ext}}
           </ng-container>
           <ng-template #notYetUploaded>

@@ -10,7 +10,7 @@
         <div class="col-12 col-md-7">
           <mat-form-field class="w-100">
             <mat-label>ResourceName</mat-label>
-            <input matInput [(ngModel)]="resourcePermission.resourceName" name="resourceName" autocomplete="off">
+            <input [(ngModel)]="resourcePermission.resourceName" autocomplete="off" matInput name="resourceName">
             <mat-icon matSuffix>text_fields</mat-icon>
           </mat-form-field>
         </div>
@@ -31,7 +31,8 @@
                  class="grouped-inputs">
               <mat-form-field class="w-100">
                 <mat-label>Name</mat-label>
-                <input matInput [(ngModel)]="method.name" name="name[{{methodIndex}}]" placeholder="list | show | create | update | delete" autocomplete="off">
+                <input [(ngModel)]="method.name" autocomplete="off" matInput
+                       name="name[{{methodIndex}}]" placeholder="list | show | create | update | delete">
                 <mat-icon matSuffix>text_fields</mat-icon>
               </mat-form-field>
               <mat-form-field class="w-100">
@@ -45,9 +46,9 @@
                     {{role.name}}
                     <mat-icon *ngIf="removableChipListRoles" matChipRemove>cancel</mat-icon>
                   </mat-chip>
-                  <input matInput [ngModel]="roleInputs[methodIndex]" (ngModelChange)="roleChanged($event, methodIndex)"
-                         [matChipInputFor]="rolesChipList" [matAutocomplete]="rolesAuto"
-                         name="roleInputs[{{methodIndex}}]" autocomplete="off">
+                  <input (ngModelChange)="roleChanged($event, methodIndex)" [matAutocomplete]="rolesAuto" [matChipInputFor]="rolesChipList"
+                         [ngModel]="roleInputs[methodIndex]" autocomplete="off"
+                         matInput name="roleInputs[{{methodIndex}}]">
                   <mat-icon *ngIf="!isLoadingRoles[methodIndex]" matSuffix svgIcon="neth:hexagon-multiple"></mat-icon>
                   <mat-spinner *ngIf="isLoadingRoles[methodIndex]" diameter="20" matSuffix></mat-spinner>
                   <mat-autocomplete #rolesAuto="matAutocomplete" (optionSelected)="selectedRoles($event, methodIndex)"

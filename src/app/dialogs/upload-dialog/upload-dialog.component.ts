@@ -35,7 +35,7 @@ export class UploadDialogComponent {
   sort: Sort = {
     active: '_id',
     direction: 'asc'
-  }
+  };
   dataSource: CollectionDataSource<MediaObject>;
 
   constructor(private httpService: HttpGenericService, public dialogRef: MatDialogRef<UploadDialogComponent>,
@@ -44,7 +44,7 @@ export class UploadDialogComponent {
   }
 
   saveDialog() {
-    this.dialogRef.close(this.dataSource.selection.selected)
+    this.dialogRef.close(this.dataSource.selection.selected);
   }
 
   cancelDialog() {

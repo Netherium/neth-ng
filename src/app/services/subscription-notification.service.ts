@@ -14,17 +14,17 @@ export class SubscriptionNotificationService {
   snackbarConfigSuccess: MatSnackBarConfig = {
     duration: 2000,
     panelClass: ['mat-toolbar', 'mat-primary']
-  }
+  };
 
   snackbarConfigError: MatSnackBarConfig = {
     duration: 2000,
     panelClass: ['mat-toolbar', 'mat-accent']
-  }
+  };
 
   constructor(private snackBar: MatSnackBar) {
   }
 
-  getDisplayAction(action: CRUDAction): string{
+  getDisplayAction(action: CRUDAction): string {
     switch (action) {
       case CRUDAction.CREATE:
         return 'Created';
@@ -72,6 +72,6 @@ export class SubscriptionNotificationService {
           cbSuccess(data);
         }
       }
-    })
+    });
   }
 }

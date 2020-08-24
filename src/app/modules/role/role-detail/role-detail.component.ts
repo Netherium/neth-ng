@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-    selector: 'app-role-detail',
-    templateUrl: './role-detail.component.html'
-  })
+  selector: 'app-role-detail',
+  templateUrl: './role-detail.component.html'
+})
 export class RoleDetailComponent {
   action: CRUDAction = CRUDAction.CREATE;
   role: Role = {
@@ -18,7 +18,7 @@ export class RoleDetailComponent {
     name: '',
     isAuthenticated: null,
     description: '',
-    };
+  };
   isLoading = false;
 
   constructor(private httpService: HttpGenericService, private subNotSrv: SubscriptionNotificationService, private router: Router, private activatedRoute: ActivatedRoute) {

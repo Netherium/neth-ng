@@ -55,7 +55,7 @@ export class ResourcePermissionDetailComponent {
           finalize(() => this.isLoadingRoles[index] = false)
         )
       )
-    )
+    );
   }
 
   roleChanged(text: string, index: number) {
@@ -89,7 +89,7 @@ export class ResourcePermissionDetailComponent {
         name: '',
         roles: []
       }
-    )
+    );
     const index = this.resourcePermission.methods.length - 1;
     this.setFilteredObservable(index);
     entityForm.form.markAsDirty();

@@ -22,6 +22,6 @@ export class GenericResolverService<T> implements Resolve<T> {
             return EMPTY;
           }
         })
-      )
+      );
   }
 }

@@ -38,7 +38,7 @@ export class MediaObjectComponent {
   sort: Sort = {
     active: '_id',
     direction: 'asc'
-  }
+  };
   dataSource = new CollectionDataSource<MediaObject>(this.httpService, this.resource, this.sort, 0, 10, '');
 
   constructor(private httpService: HttpGenericService, public dialog: MatDialog, private subNotSrv: SubscriptionNotificationService) {

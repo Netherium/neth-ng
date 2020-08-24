@@ -34,16 +34,17 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <div>
-        <a routerLink="" class="mat-toolbar-link">
-          <img alt="Neth Toolbar Logo"  class="mat-toolbar-logo" src="assets/logo_40.png">
+        <a class="mat-toolbar-link" routerLink="">
+          <img alt="Neth Toolbar Logo" class="mat-toolbar-logo" src="assets/logo_40.png">
           <span>eth-ng</span>
         </a>
       </div>
       <span class="flex-fill"></span>
       <ng-container *ngIf="(currentUser|async) as user;">
-        <img *ngIf="user.display; else loginButtonTemplate" [matMenuTriggerFor]="userActionsMenu" [src]="user.display.thumbnail.url"
-             [alt]="user.display.name"
-             class="avatar" >
+        <img *ngIf="user.display; else loginButtonTemplate" [alt]="user.display.name"
+             [matMenuTriggerFor]="userActionsMenu"
+             [src]="user.display.thumbnail.url"
+             class="avatar">
         <ng-template #loginButtonTemplate>
           <button [matMenuTriggerFor]="userActionsMenu" aria-label="Login" mat-icon-button>
             <mat-icon>person_outline</mat-icon>
@@ -51,7 +52,8 @@
         </ng-template>
         <mat-menu #userActionsMenu="matMenu">
           <button mat-menu-item>
-            <img *ngIf="user.display" [src]="user?.display.thumbnail.url" [alt]="user?.display.name" class="button-avatar">
+            <img *ngIf="user.display" [alt]="user?.display.name" [src]="user?.display.thumbnail.url"
+                 class="button-avatar">
             <a [routerLink]="['/users/edit', user._id]" style="text-decoration: none;">{{user.name}}</a>
           </button>
           <mat-slide-toggle (ngModelChange)="selectedThemeChanged($event)" [ngModel]="darkTheme" class="mat-menu-item">

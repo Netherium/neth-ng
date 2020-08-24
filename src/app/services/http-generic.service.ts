@@ -39,7 +39,7 @@ export class HttpGenericService {
    * Returns a PaginatedCollection, transforming data of <T> to a PaginatedCollection<T>
    */
   listPaginatedCollection<T>(endpoint: string, sort: { active: string; direction: string } | null, pageNumber: number, pageSize: number, query: string = ''): Observable<PaginatedCollection<T>> {
-    let queryParameters = `_page=${pageNumber + 1}&_limit=${pageSize}`
+    let queryParameters = `_page=${pageNumber + 1}&_limit=${pageSize}`;
     if (sort !== null) {
       if (sort.direction !== '') {
         if (sort.direction === 'desc') {
@@ -58,7 +58,7 @@ export class HttpGenericService {
         map(data => PaginatedCollection.fromResponse<T>(data, pageNumber, pageSize, query)),
         tap(t => console.log('service.list ' + t.data.length)),
         catchError(this.errorHandler.handlePaginationError<PaginatedCollection<T>>('service.listPaginatedCollection', PaginatedCollection.emptyCollection<T>(pageNumber, pageSize, query)))
-      )
+      );
   }
 
   /**
@@ -126,7 +126,7 @@ export class HttpGenericService {
 
   createUpload<T>(endpoint: string, model: T, file: Blob): Observable<T | HttpErrorResponse> {
     const formData = new FormData();
-    for (let key in model) {
+    for (const key in model) {
       if (model.hasOwnProperty(key) && typeof model[key] === 'string') {
         formData.append(key, model[key].toString());
       }
