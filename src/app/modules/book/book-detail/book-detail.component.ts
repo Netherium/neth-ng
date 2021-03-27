@@ -43,6 +43,7 @@ export class BookDetailComponent {
   pagesForReviewValue = '';
   datesForReviewValue = '';
 
+  // tslint:disable-next-line:max-line-length
   constructor(private httpService: HttpGenericService, private subNotSrv: SubscriptionNotificationService, private router: Router, private activatedRoute: ActivatedRoute) {
     if (this.activatedRoute.snapshot.data.action === CRUDAction.UPDATE) {
       this.book = this.activatedRoute.snapshot.data.book;
@@ -75,7 +76,7 @@ export class BookDetailComponent {
     );
   }
 
-  authorChanged(text: string) {
+  authorChanged(text: string): void {
     if (text === '') {
       this.book.author = null;
     }
@@ -98,7 +99,7 @@ export class BookDetailComponent {
     entityForm.form.markAsDirty();
   }
 
-  collaboratorsChanged(text: string) {
+  collaboratorsChanged(text: string): void {
     this.collaboratorsChangedSub.next(text);
   }
 
@@ -161,7 +162,7 @@ export class BookDetailComponent {
     input.value = '';
   }
 
-  save() {
+  save(): void {
     this.isLoading = true;
     let obs: Observable<Book | HttpErrorResponse>;
     if (this.action === CRUDAction.CREATE) {

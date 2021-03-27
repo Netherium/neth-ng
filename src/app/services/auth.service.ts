@@ -79,7 +79,7 @@ export class AuthService {
     );
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('JWT');
     localStorage.removeItem('User');
     this.currentUserSubject.next(null);
@@ -88,7 +88,7 @@ export class AuthService {
   /**
    * Returns JWT headers for token-interception
    */
-  getAuthHeaders() {
+  getAuthHeaders(): {Authorization: string} {
     return {
       Authorization: `Bearer ${this.getStoredJWT()}`
     };
@@ -112,12 +112,12 @@ export class AuthService {
    *  Used by AuthGuardService
    *  Returns if user is authenticated according to the authorized role, declared in environment.ts
    */
-  isAuthenticated(): Boolean {
+  isAuthenticated(): boolean {
     try {
       const token = this.getStoredJWT();
       const decodedToken = jwt_decode<JwtDecoded>(token);
       const dateNow = new Date().getTime() / 1000;
-      return (decodedToken.role === environment.authorizedRole && decodedToken.exp > dateNow);
+      return (environment.authorizedRole.includes(decodedToken.role) && decodedToken.exp > dateNow);
     } catch (e) {
       return false;
     }
