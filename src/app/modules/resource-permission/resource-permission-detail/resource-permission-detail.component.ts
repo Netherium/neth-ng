@@ -67,6 +67,7 @@ export class ResourcePermissionDetailComponent {
     if (role) {
       return role.name;
     }
+    return null;
   }
 
   selectedRoles(event: MatAutocompleteSelectedEvent, index: number): void {

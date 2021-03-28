@@ -61,6 +61,7 @@ export class UserDetailComponent {
     if (role) {
       return role.name;
     }
+    return null;
   }
 
   save(): void {

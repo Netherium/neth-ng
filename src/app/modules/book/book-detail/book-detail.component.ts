@@ -87,6 +87,7 @@ export class BookDetailComponent {
     if (user) {
       return user.email;
     }
+    return null;
   }
 
   selectedCollaborators(event: MatAutocompleteSelectedEvent): void {
@@ -107,6 +108,7 @@ export class BookDetailComponent {
     if (user) {
       return user.email;
     }
+    return null;
   }
 
   addTags(event: MatChipInputEvent): void {

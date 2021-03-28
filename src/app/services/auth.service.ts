@@ -4,7 +4,7 @@ import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ErrorHandlingService } from './error-handling.service';
 import { environment } from '../../environments/environment';
-import * as jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import { JwtDecoded } from '../models/jwt-decoded.model';
 import { AuthCredentials } from '../models/auth-credentials.model';
 import { AuthUser } from '../models/auth-user.model';
@@ -88,7 +88,7 @@ export class AuthService {
   /**
    * Returns JWT headers for token-interception
    */
-  getAuthHeaders(): {Authorization: string} {
+  getAuthHeaders(): { Authorization: string } {
     return {
       Authorization: `Bearer ${this.getStoredJWT()}`
     };
