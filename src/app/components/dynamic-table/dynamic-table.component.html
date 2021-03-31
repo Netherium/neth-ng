@@ -13,7 +13,6 @@
   </ng-container>
 </ng-template>
 
-
 <ng-template #dynamicTable>
   <div class="d-flex flex-wrap justify-content-between">
     <div>
@@ -219,7 +218,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="selectedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: selectedColumns;" matRipple (click)="editDialog(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: selectedColumns;" matRipple (click)="editDialog(row)" [matRippleDisabled]="displayAsDialog"></mat-row>
 
   </mat-table>
 
