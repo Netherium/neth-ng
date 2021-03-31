@@ -103,3 +103,9 @@ a.cell-file {
 .cdk-global-overlay-wrapper {
   overflow-y: scroll !important;
 }
+
+.mat-progress-bar.mat-card-loader{
+  position: absolute;
+  top: 4px;
+  left: 0;
+}
