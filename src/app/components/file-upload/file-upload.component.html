@@ -36,24 +36,24 @@
         </mat-chip>
       </ng-template>
     </mat-chip-list>
-    <button [disabled]="!canAddFiles" [matMenuTriggerFor]="addFileOptionsMenu" color="primary" mat-icon-button>
+    <button [disabled]="!canAddFiles" [matMenuTriggerFor]="addFileOptionsMenu" color="primary" mat-icon-button type="button">
       <mat-icon>add</mat-icon>
     </button>
     <mat-menu #addFileOptionsMenu="matMenu">
-      <button (click)="triggerNativeFileDialog()" mat-menu-item>
+      <button (click)="triggerNativeFileDialog()" mat-menu-item type="button">
         <mat-icon>computer</mat-icon>
         <span>Add from Device</span>
       </button>
-      <button (click)="triggerMediaObjectsDialog()" *ngIf="!standAlone" mat-menu-item>
+      <button (click)="triggerMediaObjectsDialog()" *ngIf="!standAlone" mat-menu-item type="button">
         <mat-icon>perm_media</mat-icon>
         <span>Add from Media Objects</span>
       </button>
     </mat-menu>
     <button (click)="upload()" *ngIf="!isLoading; else loadingButton" [disabled]="!canUpload()" color="primary"
-            mat-raised-button>Upload
+            mat-raised-button type="button">Upload
     </button>
     <ng-template #loadingButton>
-      <button color="accent" disabled mat-raised-button>
+      <button color="accent" disabled mat-raised-button type="button">
         <mat-spinner diameter="20"></mat-spinner>
       </button>
     </ng-template>
