@@ -38,7 +38,7 @@ export class HttpGenericService {
    * GET PaginatedCollection<T>
    * Returns a PaginatedCollection, transforming data of <T> to a PaginatedCollection<T>
    */
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   listPaginatedCollection<T>(endpoint: string, sort: { active: string; direction: string } | null, pageNumber: number, pageSize: number, query: string = ''): Observable<PaginatedCollection<T>> {
     let queryParameters = `_page=${pageNumber + 1}&_limit=${pageSize}`;
     if (sort !== null) {
@@ -58,7 +58,7 @@ export class HttpGenericService {
       .pipe(
         map(data => PaginatedCollection.fromResponse<T>(data, pageNumber, pageSize, query)),
         tap(t => console.log('service.list ' + t.data.length)),
-        // tslint:disable-next-line:max-line-length
+        // eslint-disable-next-line max-len
         catchError(this.errorHandler.handlePaginationError<PaginatedCollection<T>>('service.listPaginatedCollection', PaginatedCollection.emptyCollection<T>(pageNumber, pageSize, query)))
       );
   }

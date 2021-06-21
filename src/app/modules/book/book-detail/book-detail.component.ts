@@ -44,7 +44,7 @@ export class BookDetailComponent {
   pagesForReviewValue = '';
   datesForReviewValue = '';
 
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   constructor(private httpService: HttpGenericService, private subNotSrv: SubscriptionNotificationService, private router: Router, private activatedRoute: ActivatedRoute) {
     if (this.activatedRoute.snapshot.data.action === CRUDAction.UPDATE) {
       this.book = this.activatedRoute.snapshot.data.book;

@@ -30,7 +30,7 @@ export class ResourcePermissionDetailComponent {
   selectableChipListRoles = true;
   removableChipListRoles = true;
 
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   constructor(private httpService: HttpGenericService, private subNotSrv: SubscriptionNotificationService, private router: Router, private activatedRoute: ActivatedRoute) {
     if (this.activatedRoute.snapshot.data.action === CRUDAction.UPDATE) {
       this.resourcePermission = this.activatedRoute.snapshot.data.resourcePermission;
