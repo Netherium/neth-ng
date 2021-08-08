@@ -25,8 +25,3 @@ export class PaginatedCollection<T> {
     return self;
   }
 }
-
-
-
-
-// localapi/products?items=10&page=2
