@@ -16,8 +16,7 @@ export class ErrorHandlingService {
    * @param operation - name of the operation that failed
    * @param result - optional code to return as the observable result
    */
-  // eslint-disable-next-line 
-  public handleError<T>(operation = 'operation', result?: T) {
+  public handleError<T>(operation = 'operation', result?: T): (error: any) => Observable<T | HttpErrorResponse> {
     return (error: any): Observable<T | HttpErrorResponse> => {
 
       console.error(`${operation} failed: ${error.message}`);
@@ -28,14 +27,13 @@ export class ErrorHandlingService {
   }
 
   /**
-   * Handle Paginarion Http operation that failed.
+   * Handle Pagination Http operation that failed.
    * Return an empty pagination collection
    * @param operation - name of the operation that failed
    * @param result - optional code to return as the observable result
    */
-  // eslint-disable-next-line 
-  public handlePaginationError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+  public handlePaginationError<T>(operation = 'operation', result?: T): () => Observable<T> {
+    return (): Observable<T> => {
 
       console.error(`${operation} failed:`, result);
 
@@ -49,8 +47,7 @@ export class ErrorHandlingService {
    * Let the app continue.
    * @param operation - name of the operation that failed
    */
-  // eslint-disable-next-line
-  public handleErrorWithMessage(operation = 'operation') {
+  public handleErrorWithMessage(operation = 'operation'): (error: any) => Observable<HttpErrorResponse> {
     return (error: any): Observable<HttpErrorResponse> => {
 
       console.error(`${operation} failed: ${error.message}`);
