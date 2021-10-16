@@ -1,6 +1,20 @@
 {
   "name": "neth-ng",
   "version": "0.3.5",
+  "keywords": [
+    "Angular",
+    "Material",
+    "Data Tables",
+    "Material",
+    "Admin Panel",
+    "Rest Api"
+  ],
+  "author": "Netherium",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Netherium/neth-ng.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
