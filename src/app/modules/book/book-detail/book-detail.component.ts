@@ -193,16 +193,10 @@ export class BookDetailComponent {
     } else {
       obs = this.httpService.update<Book>('books', this.book);
     }
-    this.subNotSrv.singleSubscription<Book>(obs, this.action, 'Book',
-      () => {
-        this.isLoading = false;
-      },
-      () => {
-        this.router.navigate(['/books']).then();
-      },
-      () => {
-
-      }
-    );
+    this.subNotSrv.singleSubscription<Book>(obs, this.action, 'Book', () => {
+      this.isLoading = false;
+    }, () => {
+      this.router.navigate(['/books']).then();
+    });
   }
 }
