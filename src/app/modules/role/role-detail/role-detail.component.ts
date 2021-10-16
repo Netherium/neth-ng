@@ -40,7 +40,7 @@ export class RoleDetailComponent {
     this.subNotSrv.singleSubscription<Role>(obs, this.action, 'Role', () => {
       this.isLoading = false;
     }, () => {
-      this.router.navigate(['/roles']);
+      this.router.navigate(['/roles']).then();
     });
   }
 }

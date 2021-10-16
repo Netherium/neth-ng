@@ -37,7 +37,7 @@ export class MediaObjectDetailComponent {
     this.subNotSrv.singleSubscription<MediaObject>(obs, this.action, 'MediaObject', () => {
       this.isLoading = false;
     }, () => {
-      this.router.navigate(['/media-objects']);
+      this.router.navigate(['/media-objects']).then();
     });
   }
 

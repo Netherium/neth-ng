@@ -75,7 +75,7 @@ export class UserDetailComponent {
     this.subNotSrv.singleSubscription<User>(obs, this.action, 'User', () => {
       this.isLoading = false;
     }, () => {
-      this.router.navigate(['/users']);
+      this.router.navigate(['/users']).then();
     });
   }
 }

@@ -113,7 +113,7 @@ export class ResourcePermissionDetailComponent {
     this.subNotSrv.singleSubscription<ResourcePermission>(obs, this.action, 'ResourcePermission', () => {
       this.isLoading = false;
     }, () => {
-      this.router.navigate(['/resource-permissions']);
+      this.router.navigate(['/resource-permissions']).then();
     });
   }
 

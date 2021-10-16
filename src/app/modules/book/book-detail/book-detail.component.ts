@@ -196,7 +196,7 @@ export class BookDetailComponent {
     this.subNotSrv.singleSubscription<Book>(obs, this.action, 'Book', () => {
       this.isLoading = false;
     }, () => {
-      this.router.navigate(['/books']);
+      this.router.navigate(['/books']).then();
     });
   }
 }
