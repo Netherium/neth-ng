@@ -1,6 +1,6 @@
 {
   "name": "neth-ng",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,7 +12,7 @@
     "build:stats": "ng build --stats-json",
     "analyze:stats": "webpack-bundle-analyzer ./dist/neth-ng/stats.json"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~12.2.0",
     "@angular/cdk": "~12.2.0",
