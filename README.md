@@ -3,10 +3,11 @@
 </h1>
 <h4 align="center">A frontend admin panel written in Typescript using <a href="https://github.com/angular" target="_blank">Angular</a> and <a href="https://github.com/angular/material" target="_blank">Angular Material</a></h4>
 <h5 align="center">Modules, file-upload/dynamic-table components, generic http services, bundled with Material awesomeness!!!</h5>
-<h5 align="center">See it in action with <a href="https://www.npmjs.com/package/@netherium/api-gen" target="_blank">@netherium/api-gen</a></h5>
 <div align="center">
   <sub>Made with ❤ by <a href="https://github.com/Netherium">Netherium</a></sub>
 </div>
+
+<h4 align="center">See it in action with <a href="https://www.npmjs.com/package/@netherium/api-gen" target="_blank">@netherium/api-gen</a></h5>
 
 ## Structure
 
