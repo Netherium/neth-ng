@@ -87,7 +87,6 @@ export class BookDetailComponent {
 }
 ```
 
-
 ## Subscription Notification service
 
 The notification service is based on `MatSnackBar`.
